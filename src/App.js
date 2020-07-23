@@ -20,13 +20,24 @@ class App extends Component {
     });
   };
 
-  render() {
-    const loginPage = this.state.isLoggedIn ? <UserPage /> : <Login />;
+  handleSignUp = () => {
+    this.setState((prevState) => {
+      return {
+        SignUp: !prevState.SignUp,
+      };
+    });
+  };
 
+  render() {
     return (
       <div className="App">
-        {this.state.SignUp === false && loginPage}
-        {this.state.SignUp && <SignUp />}
+        {this.state.SignUp === false &&
+          (this.state.isLoggedIn ? (
+            <UserPage />
+          ) : (
+            <Login handleSignUp={this.handleSignUp} />
+          ))}
+        {this.state.SignUp && <SignUp handleSignUp={this.handleSignUp} />}
       </div>
     );
   }
