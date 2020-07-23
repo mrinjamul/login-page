@@ -1,10 +1,14 @@
 import React, { Component } from "react";
-
+import "./App.css";
+import Login from "./components/Login";
+import SignUp from "./components/SignUp";
+import UserPage from "./components/UserPage";
 class App extends Component {
   constructor() {
     super();
     this.state = {
       isLoggedIn: false,
+      SignUp: false,
     };
   }
 
@@ -17,12 +21,12 @@ class App extends Component {
   };
 
   render() {
-    let buttonText = this.state.isLoggedIn ? "LOG OUT" : "LOG IN";
-    let displayText = this.state.isLoggedIn ? "Logged in" : "Logged out";
+    const loginPage = this.state.isLoggedIn ? <UserPage /> : <Login />;
+
     return (
       <div className="App">
-        <button onClick={this.handleClick}>{buttonText}</button>
-        <h1>{displayText}</h1>
+        {this.state.SignUp === false && loginPage}
+        {this.state.SignUp && <SignUp />}
       </div>
     );
   }
